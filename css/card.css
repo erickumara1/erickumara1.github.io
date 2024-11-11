@@ -22,7 +22,7 @@
 /* This container is needed to position the front and back side */
 .flip-card-inner {
   position: relative;
-  width: 100%;
+  width: 250px;
   height: 100%;
   text-align: center;
   transition: transform 0.8s;
@@ -40,6 +40,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  min-height: 250px;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
 }
@@ -82,6 +83,7 @@
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-wrap:wrap;
   gap: 4rem;
   padding: 20px;
 }
