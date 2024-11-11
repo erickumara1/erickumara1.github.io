@@ -73,12 +73,6 @@
   font-size: medium;  
 }
 
-@media(max-width:580px){
-  .flip-text-cards{
-    flex-wrap: wrap;
-  }
-}
-
 .flip-text-cards{
   align-items: center;
   justify-content: center;
