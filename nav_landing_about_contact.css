@@ -1,0 +1,425 @@
+*{
+    padding:0;
+    margin:0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html{
+    height:100%;
+}
+
+body{   
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: white;
+}
+
+nav{
+    position: sticky;
+    z-index: 1  ;
+    top: 0;
+    width: 100%;
+    background: black;
+    height: 80px;
+}
+
+nav ul{
+    float:right;
+    margin-right: 20px;
+}
+
+nav ul li{
+    display:inline-block;
+    line-height: 80px;
+    margin: 0 15px;
+}
+
+nav ul li a{
+    color:white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+a:hover{
+    color:black;
+    background: white;
+    transition: .5s;
+}
+
+.checkbtn{
+    display: none;
+    font-size: 30px;
+    color:white;
+    float:right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+
+#check{
+    display:none;
+}
+
+.box{
+    position:absolute;
+    transition: all 1s;
+    margin-top: 25px;
+    display: inline-flex;
+  }
+  
+.box .eye{
+    position:relative;
+    height:30px;
+    width:30px;
+    display:block;
+    background:white;
+    margin: 0 5px;
+    border-radius:50%; 
+    left: 15px;
+}
+
+.box .eye::before{
+    content:'';
+    position:absolute;
+    top: 50%;
+    left: 10px;
+    width:18px;
+    height:18px;
+    border-radius: 50%;
+    background:black;
+    transform: translate(-50%,-50%);
+}
+
+@media(max-width: 1250px){
+    .checkbtn{
+        display:block;  
+    }
+
+    ul{
+        position:fixed;
+        width:100%;
+        height:fit-content;
+        z-index: 1;
+        background:black;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    nav ul li{
+        display: block;
+    }
+
+    nav ul li a{
+        font-size:20px;
+    }
+
+    a:hover{
+        background: lightgray;
+        color: black;
+    }
+
+    #check:checked ~ ul{
+        left: 0;
+    }
+
+
+    .box {
+        transition: all 1s;
+        position: absolute;
+        left: 50%;
+        margin-left:-55px;
+        /* margin-left: 41%; */
+    }    
+
+    section, .section-cotainer{
+        height: fit-content;
+    }
+    
+    #landing{
+        margin-bottom: 6rem;
+        flex-wrap: wrap;
+        gap: 1rem;  
+    }
+
+
+}
+
+section{
+    padding-top:4vh;
+    height: 96vh;
+    margin: 0 10rem;
+    box-sizing: border-box;
+    min-height: fit-content;
+}
+
+.section-cotainer{
+    display: flex;
+}
+
+#about{
+    padding-top: 15vh;
+    display: flex;
+    justify-content: center;
+    gap: 0rem;
+    height: 80vh;
+    flex-wrap: wrap;
+    padding-bottom: 5em;
+  }
+  
+
+#landing{
+    padding-top: 200px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    height: fit-content;
+    padding-bottom: 25vh;
+}
+
+.landing_pic img{
+    display: flex;
+    max-width: 350px;
+    height: auto;
+    border-radius: 20px;
+}
+
+
+.landing_text{
+    margin-top: 0px;
+    align-self: center;
+    text-align: center;
+}
+
+.landing_small_text{
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color:black;
+}
+
+.h_container{
+    display:inline-block;
+}
+
+.landing_name{
+    font-size: 3.25rem;
+    font-weight: bolder;
+    letter-spacing: 5px;
+    border-right: 5px solid;
+    
+    width:100%;
+    white-space: nowrap;
+    overflow: hidden;
+    animation:
+        typing 1.5s steps(11),
+        cursor .4s step-end infinite alternate;    
+}
+
+
+@keyframes typing{
+    from {width: 0%}    
+}
+
+
+@keyframes cursor {
+    50% {border-color: transparent}    
+}
+
+
+.landing_icons i{
+    cursor:pointer;
+    height:2rem;
+    margin: 3px;
+    margin-top: 15px;
+    font-size: 30px;
+    color: grey;
+    transition: all 0.5s ease;
+}
+
+.landing_icons i:hover{
+    color:black;
+}
+
+.landing_button{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.landing_button .but{
+    font-weight: 600;
+    margin-top: 15px;
+    transition: all 0.5s ease;
+    padding: 1rem;
+    border-radius: 2rem;
+    width: 8 rem;
+}
+
+.landing_contact{
+    border:grey 0.1rem solid;
+}
+
+.landing_resume{
+    border: black 0.1rem solid;
+    background: white;
+}
+
+
+.landing_contact:hover, .landing_resume:hover{
+    cursor:pointer;
+}
+
+.landing_contact, .landing_resume:hover{
+    background:black;
+    color:white;
+}
+
+.landing_contact:hover{
+    background:black;
+    border:black 0.1rem solid;
+}
+
+.landing_contact{
+    background:grey;
+    color:white;
+}
+
+.landing_resume:hover{
+    border:black 0.1rem solid;
+}
+
+#landing{
+    width: 100%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+#about{
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    background-color: white;
+    display: block;
+    height:fit-content;
+    justify-content: center;
+}
+
+
+.about_title{
+    text-wrap:nowrap;
+    text-align: center;
+    padding-top: 20vh;
+    padding-bottom: 5vh;
+    height:fit-content;
+    font-size: 2.5rem;
+}
+
+.about_cards{
+    padding-bottom: 5vh;
+    align-self: center;
+    gap: 4rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.skills_containers{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.icon{
+    margin-top: 0.25rem;
+    width: 20px;
+    height: 20px;
+}
+
+.details_containers{
+    margin: 1rem;
+    max-width: 800px;
+    min-width: 150px;
+    display:flex;
+    text-align: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 2.5rem;
+    justify-content: space-around;
+    border:black 0.1rem solid;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+article{
+    display:flex;
+    gap: 0.35rem;
+    justify-content: space-around;
+}
+
+article div h2{
+    text-align: left;
+}
+
+#contact{
+    padding-top: 15rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#contact h1{    
+    font-size: 2.5rem;
+    padding-top: 20vh;
+    padding-bottom: 5vh;
+}
+
+.contact_title{
+    display:inline-block
+}
+
+.contact_info{
+    margin: 0 auto;
+    padding: 1rem;
+    gap: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.info{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.info i{
+    font-size: 1.75rem;
+}
+
+.info p, .info a{
+    font-size: 1.25rem;
+    color:black;
+}
+
+.info p:hover, .info a:hover{
+    color:gray;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.5rem;
+}

@@ -1,0 +1,116 @@
+#experience{
+    height:fit-content;
+}
+
+.timeline{  
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline_entry{
+    margin: 0 auto;
+    max-width: 36em;
+    min-width: 18em;
+    padding-top: 2em;  
+    padding-bottom: 2em;
+    position: relative;
+}
+
+.timeline_text{
+    padding:2em;
+    min-width: 10rem;
+    border: 0.1rem solid black;
+    border-radius: 1em;
+}
+
+.timeline_text p{
+    padding: 8px 8px;
+}
+
+
+.timeline_entry:nth-child(odd){
+    border-left: 0.2rem solid black;
+    padding-left: 4em;
+}
+
+.timeline_entry:nth-child(even){
+    border-right: none ;
+    border-left: 0.2rem solid black;
+    padding-left: 4em;
+}
+
+.timeline_entry:nth-child(even)::before,
+.timeline_entry:nth-child(odd)::before{
+    background: black;
+    content: '';
+    width: 4em;
+    height: 3px;
+    position: absolute;
+    top: 50%;
+    left:0;
+}
+
+.timeline_entry:nth-child(even) div::before,
+.timeline_entry:nth-child(odd) div::before{
+    background: black;
+    content: '';
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    position: absolute;
+    top: 48.25%;
+    left:0;
+}
+
+.timeline_entry:nth-child(odd) div::before, 
+.timeline_entry:nth-child(even) div::before{
+    left: -0.5em;
+}
+
+#experience{
+    padding-top: 12rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#experience h1{    
+    font-size: 2.5rem;
+    padding-top: 25vh;
+    padding-bottom: 5vh;
+}
+
+
+
+
+
+@media(max-width:525px){
+    #experience{
+        margin-left: 10%;
+    }
+}
+
+@media(min-width:1100px){
+    .timeline_entry:nth-child(odd){
+        transform: translateX(49.5%);
+        padding-left: 4em;
+    }
+    .timeline_entry:nth-child(even){
+        border-left:none;
+        transform: translateX(-50%);
+        border-right: 0.2rem solid black;
+        padding-right: 4em;
+    }
+
+    .timeline_entry:nth-child(even)::before{
+        right:0;
+        left: auto;
+    }
+
+    .timeline_entry:nth-child(even) div::before{
+        right:-0.5rem;
+        left: auto;
+    }
+}
