@@ -10,5 +10,6 @@ CREATE TABLE vault_table
     password VARCHAR(64) NOT NULL
 );
 
+--initializing testing values to see if docker can launch vault_table
 INSERT INTO vault_table
 VALUES('test_url','test_username','test_password');
