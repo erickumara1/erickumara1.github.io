@@ -1,5 +1,7 @@
 import docker
-import pg8000
+import time
+from launch_db import connect_db
+
 
 def start_docker(image_name, container_name, client):
     try:
@@ -26,28 +28,6 @@ def start_docker(image_name, container_name, client):
 
     return container
 
-def connect_db():
-    try:
-        db_name = "vault_db"
-        db_user = "postgres"
-        db_password = "docker"
-        db_host = "localhost"
-        db_port = 5432
-        connection = pg8000.connect(
-            database=db_name,
-            user=db_user,
-            password=db_password,
-            host=db_host,
-            port=db_port
-        )
-        cursor = connection.cursor()
-        print("Connected to the PostgreSQL database.")
-        return cursor
-
-    except: 
-        print('Connection to PostgreSQL Error')        
-
-
 if __name__ == "__main__":
 
     #EDIT NAME 
@@ -59,11 +39,11 @@ if __name__ == "__main__":
     container = start_docker(image_name,container_name, client)
     container.start()
 
-    # connection to database
+    # connection to database and cursor
+    print("Waiting for Container to Boot")
+    time.sleep(3)
     cursor = connect_db()
-    
 
-  
 
     
 
