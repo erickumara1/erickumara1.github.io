@@ -1,6 +1,6 @@
 --the database will have 3 columns, URL, Username, Password
--- the values will be hashed with salting using SHA-256
--- the master key of the PM is the initialization vector for SHA-256
+-- the values will be hashed with salting using AES-256
+-- the master key of the PM a predetermined value punched out
 -- output is 256 bits = 32 bytes = 64 charachter, 1 bytes = 2 charachter
 
 CREATE TABLE vault_table
