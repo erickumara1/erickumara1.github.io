@@ -5,11 +5,11 @@
 
 CREATE TABLE vault_table
 (
-    url VARCHAR(64) NOT NULL,
-    username VARCHAR(64) NOT NULL,
-    password VARCHAR(64) NOT NULL
+    url_nonce TEXT NOT NULL,
+    url TEXT NOT NULL,
+    username_nonce TEXT NOT NULL,
+    username TEXT NOT NULL,
+    password_nonce TEXT NOT NULL,
+    password TEXT NOT NULL   
 );
 
---initializing testing values to see if docker can launch vault_table
-INSERT INTO vault_table
-VALUES('test_url','test_username','test_password');

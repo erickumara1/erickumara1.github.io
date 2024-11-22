@@ -53,7 +53,7 @@ def connect_db():
         except Exception as e:
             print("Cursor is closed or invalid:", e)
 
-        return cursor
+        return connection
 
     except: 
         print('Connection to PostgreSQL Error')        
@@ -73,3 +73,4 @@ if __name__ == "__main__":
     print("Waiting for Container to Boot")
     time.sleep(3)
     cursor = connect_db()    
+ 
