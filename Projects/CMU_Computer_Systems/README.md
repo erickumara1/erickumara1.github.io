@@ -6,14 +6,14 @@ subfolder.
 # Takeaways
 After doing the labs, I have noted down some of the biggest takeaways in C including:
 
-Lab 0 - Basic Syntax of C 
-Lab 1 - Bit Manipulation and Two's Complement
-Lab 2 - Analyzing Assembly Code from objdump and gdb debugger
-Lab 3 - Buffer Overflow and ROP Attacks
-Lab 4 - Cache Simulation and Locality for program efficiency
-Lab 5 - Signal Handlers and Forking Child Processes
-Lab 6 - Implicit List Implementation of Malloc, Explicit List Theory
-Lab 7 - Client/Server connections with Sockets, Concurrency: Threads and Resource Sharing (ie. Mutex)
+Lab 0 - Basic Syntax of C <br />
+Lab 1 - Bit Manipulation and Two's Complement <br />
+Lab 2 - Analyzing Assembly Code from objdump and gdb debugger <br />
+Lab 3 - Buffer Overflow and ROP Attacks <br />
+Lab 4 - Cache Simulation and Locality for program efficiency <br />
+Lab 5 - Signal Handlers and Forking Child Processes <br />
+Lab 6 - Implicit List Implementation of Malloc, Explicit List Theory <br />
+Lab 7 - Client/Server connections with Sockets, Concurrency: Threads and Resource Sharing (ie. Mutex) <br />
 
 
 
