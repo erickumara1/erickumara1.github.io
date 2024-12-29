@@ -1,0 +1,8 @@
+This was a github clone of a repository that taught the basics of git, 
+and the contents of the lab is included in ./git_tutorial/html
+
+Takeaway: 
+- basic operations of git including reverting
+- custom git operations for formatting
+- branch control 
+- merge conflict
