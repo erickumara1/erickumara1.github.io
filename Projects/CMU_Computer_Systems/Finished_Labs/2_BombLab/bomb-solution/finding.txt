@@ -1,0 +1,95 @@
+Phase 1 
+
+0000000000400ee0 <phase_1>:
+  400ee0:	48 83 ec 08          	sub    $0x8,%rsp
+  400ee4:	be 00 24 40 00       	mov    $0x402400,%esi
+  400ee9:	e8 4a 04 00 00       	call   401338 <strings_not_equal>
+  400eee:	85 c0                	test   %eax,%eax
+  400ef0:	74 05                	je     400ef7 <phase_1+0x17>
+  400ef2:	e8 43 05 00 00       	call   40143a <explode_bomb>
+  400ef7:	48 83 c4 08          	add    $0x8,%rsp
+  400efb:	c3                   	ret
+
+it skips the bomb if the strings are not equal, and the value is loaded from 0x402400
+running x/s 0x402400 has the string: "Border relations with Canada have never been better."
+
+Answer: Border relations with Canada have never been better.
+
+Phase 2
+
+000000000040145c <read_six_numbers> indicates that after the sscanf call, it requires
+at least 6 inputs in the format of %d %d %d %d %d %d to pass the bomb 
+
+analyzing the main loop of phase_2 indicates that rbp-0x4 is half than rbp, 
+so it requires that each consecutive %d be double than the previous one. 
+
+each %d is seperated by 4 bytes, so 1 2 4 8 16 32 should be sufficient with the null
+terminator as well. 
+
+Answer: 1 2 4 8 16 32
+
+Phase 3
+
+0000000000400f43 <phase_3>:
+  400f43:	48 83 ec 18          	sub    $0x18,%rsp //rsp reduce 24 bytes
+  400f47:	48 8d 4c 24 0c       	lea    0xc(%rsp),%rcx // rcx = rsp + 12
+  400f4c:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx // rdx = rsp + 8
+  400f51:	be cf 25 40 00       	mov    $0x4025cf,%esi // rsi = 4203983 in terms of %d %d
+  400f56:	b8 00 00 00 00       	mov    $0x0,%eax // rax = 0
+  400f5b:	e8 90 fc ff ff       	call   400bf0 <__isoc99_sscanf@plt>
+  400f60:	83 f8 01             	cmp    $0x1,%eax // rax > 1 to avoid bomb, input is greater than 1
+  400f63:	7f 05                	jg     400f6a <phase_3+0x27>
+  400f65:	e8 d0 04 00 00       	call   40143a <explode_bomb>
+
+  400f6a:	83 7c 24 08 07       	cmpl   $0x7,0x8(%rsp)
+  400f6f:	77 3c                	ja     400fad <phase_3+0x6a> //rsp + 8 needs to be less than 7
+
+  400f71:	8b 44 24 08          	mov    0x8(%rsp),%eax//rax = rsp + 8
+  400f75:	ff 24 c5 70 24 40 00 	jmp    *0x402470(,%rax,8)
+  400f7c:	b8 cf 00 00 00       	mov    $0xcf,%eax //rax = 207
+  400f81:	eb 3b                	jmp    400fbe <phase_3+0x7b>
+
+in phase 3, I found the format of the anser to be %d %d with the first input being less than 7
+there is a jump where it compares the 2nd %d to rax which is set to 207, so the answer is 
+%d 207 where the first %d is less than 7. I tried {0..7} for the first %d, and I found the anser for
+0 207.
+
+Answer: 0 207
+
+Phase 4
+
+the function had 2 parts: the main and recursive function. From the main function, there was a formatted input of dd
+and further down it compares the 2nd d to 0, and it skips the bomb if the 2nd d is zero. For the first d, it is a input
+in the recursive function. The first d is stored in the rdi, and the function only completes when rdi <= rcx. rcx was initially
+14, but the function divides it by 2 and subtracts 1 per iteration. From the first loop, rcx becomes 6, and, by the 2nd rcx becomes 3, the first
+condition can be completed. 
+
+14 -> 6 -> 2 -> 0
+7 -> 3 -> 1 -> 0
+invalid -> valid -> valid -> valid
+
+Answer: 3 0 OR 1 0 OR 0 0
+
+Phase 5
+
+//stores 16 + rsp to 22 + rsp the last 8 bit of rdx
+  40108b:	0f b6 0c 03          	movzbl (%rbx,%rax,1),%ecx //rcx = rbx+rax, rbx is input string so rcx = rbx[rax]
+  40108f:	88 0c 24             	mov    %cl,(%rsp) //rsp = last 8 bit of rcx
+  401092:	48 8b 14 24          	mov    (%rsp),%rdx //rdx = rsp
+  401096:	83 e2 0f             	and    $0xf,%edx /preserve last 4 bits of rdx, last 4 bits of rbx[rax]
+  401099:	0f b6 92 b0 24 40 00 	movzbl 0x4024b0(%rdx),%edx //rdx = 0x4024b0 + rdx, rdx is offset based from last 4 bits of rbx[rax]
+  4010a0:	88 54 04 10          	mov    %dl,0x10(%rsp,%rax,1) //bottom 8 bit of rdx = 16 + rsp + rax
+  4010a4:	48 83 c0 01          	add    $0x1,%rax // rax += 1
+  4010a8:	48 83 f8 06          	cmp    $0x6,%rax // compare rax with 6
+  4010ac:	75 dd                	jne    40108b <phase_5+0x29> // loops back if not equal to 6
+
+In phase 5, the function works if the final string is equal to "flyers" after shifting your input
+the shift on input charachters is based off an offset shift mapping letter to different letter in a custom string:
+"maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?"
+
+This offset is calculated by the last 4 bits of a charachter, so '9' is 0000 1001, so it is 'f' (maduiersn[f]) because 'f' is 
+9 offset from the beggining. 
+
+The string 9ONU67 or IONUVW is flyers after the shifts.
+
+Answer: 9ONU67 or IONUVW

