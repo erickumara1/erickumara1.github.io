@@ -1,0 +1,1 @@
+start https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Trojan:Win32/LambLoad.B!dha&threatId=-2147071126

@@ -186,7 +186,7 @@ section{
 
 .landing_pic img{
     display: flex;
-    max-width: 350px;
+    max-width: 500px;
     height: auto;
     border-radius: 20px;
 }
